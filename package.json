@@ -1,5 +1,5 @@
 {
-  "name": "music-bot-example",
+  "name": "ahmed-bot",
   "version": "1.0.0",
   "description": "Example of a Music Bot project modified by Zealcord, made by iCrawl",
   "main": "index.js",
@@ -16,9 +16,9 @@
     "DiscordJS",
     "NodeJS",
     "Discord",
-    "Zealcord"
+    "SiniMini876"
   ],
-  "author": "Zealcord",
+  "author": "SiniMini876",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/zealcordNation/music-bot-example/issues"
