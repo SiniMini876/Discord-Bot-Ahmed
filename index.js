@@ -45,6 +45,8 @@ bot.on("shardDisconnect", (event, id) =>
 bot.on("shardReconnecting", id => console.log(`Shard ${id} reconnecting...`));
 
 bot.on('message', message => {
+    if(message.content === "אחמד מאריו"){
+      message.channel.send("https://www.youtube.com/watch?v=nOCgjuu0xeA")}
     if(message.content === "שלום"){
         message.channel.send("השלום לך")}
     if(message.content === "נאד קטין"){
