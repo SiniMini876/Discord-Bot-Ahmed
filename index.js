@@ -3,31 +3,15 @@ const { Client, Util, MessageEmbed, MessageAttachment } = require("discord.js");
 const YouTube = require("simple-youtube-api");
 const ytdl = require("ytdl-core");
 const dotenv = require("dotenv").config();
-require("./server.js");
-
-const fs = require('fs');
-bot.commands = new Discord.Collection();
-
-const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
-for(const file of commandFiles){
-  const command = require(`./commands/${file}`);
-  bot.commands.set(command.name, command);
-}
-
-
-
-
 const TOKEN = process.env.BOT_TOKEN;
-const PREFIX = '';
 const GOOGLE_API_KEY = process.env.YTAPI_KEY;
+const PREFIX = '';
 const cooldown = new Set();
-
-const bot = new Client({
-  disableMentions: "all"
-});
-
 const youtube = new YouTube(GOOGLE_API_KEY);
 const queue = new Map();
+const bot = new Client({
+  disableMentions: "all"});
+require("./server.js");
 
 bot.on("warn", console.warn);
 bot.on("error", console.error);
@@ -80,7 +64,23 @@ bot.on('message', message => {
     let args = message.content.slice(PREFIX.length).split(" ");
     switch (args[0]){
         case 'poll':
-          bot.commands.get('poll')(message, args);
+            const Embd = new MessageEmbed()
+            .setColor(0x00BDFF)
+            .setTitle("מדריך הכנת סקרים בשרת נאד יפה")
+            .setDescription("וואלק תכתוב poll ואז את השאלה שאתה רוצה לשאול")
+        
+            if(!args[1]){
+                message.author.send(Embd);
+                message.delete({ timeout: 5000 }).catch(console.error);
+            }
+            if(args[1]){
+                let msgArgs = args.slice(1).join(" ");
+                message.channel.send("📋 " + "**" + msgArgs + "**").then(messageReaction => {
+                    messageReaction.react("👍");
+                    messageReaction.react("👎");
+                    message.delete({ timeout: 5000 }).catch(console.error);
+                })}
+
             break;
         case 'אני':
             if(!args[1]){
