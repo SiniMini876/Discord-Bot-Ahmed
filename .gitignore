@@ -1,5 +1,4 @@
-Procfile
-.replit
+.env
 # Logs
 logs
 *.log
