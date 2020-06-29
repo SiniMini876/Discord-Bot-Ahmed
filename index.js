@@ -40,8 +40,10 @@ bot.on("shardDisconnect", (event, id) =>
 );
 bot.on("shardReconnecting", id => console.log(`Shard ${id} reconnecting...`));
 
-bot.on('message', message => {
-  if(message.content === "אחמד מריו"){
+bot.on('message', async message => {
+    if(message.author.bot) return;
+    if(!message.guild) return;
+    if(message.content === "אחמד מריו"){
     message.channel.send("https://www.youtube.com/watch?v=nOCgjuu0xeA")}
     if(message.content === "שלום"){
         message.channel.send("השלום לך")}
@@ -64,30 +66,12 @@ bot.on('message', message => {
     let args = message.content.slice(PREFIX.length).split(" ");
     switch (args[0]){
         case 'poll':
-            const Embd = new MessageEmbed()
-            .setColor(0x00BDFF)
-            .setTitle("מדריך הכנת סקרים בשרת נאד יפה")
-            .setDescription("וואלק תכתוב poll ואז את השאלה שאתה רוצה לשאול")
-        
-            if(!args[1]){
-                message.author.send(Embd);
-                message.delete({ timeout: 5000 }).catch(console.error);
-            }
-            if(args[1]){
-                let msgArgs = args.slice(1).join(" ");
-                message.channel.send("📋 " + "**" + msgArgs + "**").then(messageReaction => {
-                    messageReaction.react("👍");
-                    messageReaction.react("👎");
-                    message.delete({ timeout: 5000 }).catch(console.error);
-                })}
-
+          const poll = require('./commands/poll.js');
+          poll.run(bot, message, args)
             break;
         case 'אני':
-            if(!args[1]){
-                return;}
-                if(args[1]){
-                message.channel.send(`שלום לך ${args[1]} אני אחמד`)
-            }
+          const אני = require('./commands/אני.js');
+          אני.run(bot, message, args)
             break;
         }
 });
@@ -106,26 +90,8 @@ bot.on("message", async msg => {
   command = command.slice(PREFIX.length);
 
   if (command === "help" || command == "cmd") {
-    const helpembed = new Discord.MessageEmbed()
-      .setColor("#7289DA")
-      .setDescription(
-        `
-__**Commands List**__
-
-**Poll Commands List**
-> \`poll\` = help for the poll feature 
-
-**Music Bot Commands List**
-> \`play\` > **\`play [title/url]\`**
-> \`search\` > **\`search [title]\`**
-> \`skip\`, \`stop\`,  \`pause\`, \`resume\`
-> \`nowplaying\`, \`queue\`, \`volume\``
-      )
-      .setFooter(
-        "©️ SiniMini876",
-      );
-    msg.author.send(helpembed);
-    msg.delete({ timeout: 5000 }).catch(console.error);
+    const Mhelp = require('./commands/MUSIC/help.js');
+    Mhelp.run(bot, msg, args);
   }
   if (command === "play" || command === "p") {
     const voiceChannel = msg.member.voice.channel;
@@ -244,7 +210,8 @@ Please provide a value to select one of the search results ranging from 1-10.
       }
       return handleVideo(video, msg, voiceChannel);
     }
-  } else if (command === "skip") {
+  }
+  else if (command === "skip") {
     if (!msg.member.voice.channel)
       return msg.channel.send(
         "תקשיב, אני צריך שתהיה בחדר שמע כדי שאמשימע לך. מה אני קוסם?"
@@ -255,7 +222,8 @@ Please provide a value to select one of the search results ranging from 1-10.
       );msg.delete({ timeout: 5000 }).catch(console.error);
     serverQueue.connection.dispatcher.end("Skip command has been used!");
     return msg.channel.send("⏭️  **|**  Skip command has been used!");
-  } else if (command === "stop") {
+  }
+  else if (command === "stop") {
     if (!msg.member.voice.channel)
       return msg.channel.send(
         "תקשיב, אני צריך שתהיה בחדר שמע כדי שאמשימע לך. מה אני קוסם?"
@@ -289,7 +257,9 @@ Please provide a value to select one of the search results ranging from 1-10.
     return msg.channel.send(
       `🎶  **|**  Now Playing: **\`${serverQueue.songs[0].title}\`**`
     );
-  } else if (command === "queue" || command === "q") {
+  } 
+  else if 
+  (command === "queue" || command === "q") {
     if (!serverQueue) return msg.channel.send("אין שום מוזיקה מתנגנת כרגע");
     return msg.channel.send(`
 __**Song Queue**__
@@ -298,21 +268,24 @@ ${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}
 
 **Now Playing: \`${serverQueue.songs[0].title}\`**
         `);msg.delete({ timeout: 5000 }).catch(console.error);
-  } else if (command === "pause") {
+  } 
+  else if (command === "pause") {
     if (serverQueue && serverQueue.playing) {
       serverQueue.playing = false;
       serverQueue.connection.dispatcher.pause();
       return msg.channel.send("⏸  **|**  הפסקתי את המוזיקה בשבילך, ידידי הצעיר");
     }msg.delete({ timeout: 5000 }).catch(console.error);
     return msg.channel.send("אין שום מוזיקה מתנגנת כרגע");
-  } else if (command === "resume") {
+  } 
+  else if (command === "resume") {
     if (serverQueue && !serverQueue.playing) {
       serverQueue.playing = true;
       serverQueue.connection.dispatcher.resume();
       return msg.channel.send("▶  **|**  הפעלתי את המוזיקה בשבילך, ידידי הצעיר");
     }msg.delete({ timeout: 5000 }).catch(console.error);
     return msg.channel.send("אין שום מוזיקה מתנגנת כרגע");
-  } else if (command === "loop") {
+  } 
+  else if (command === "loop") {
     if (serverQueue) {
       serverQueue.loop = !serverQueue.loop;
       return msg.channel.send(
@@ -388,12 +361,11 @@ function play(guild, song) {
     })
     .on("error", error => console.error(error));
   dispatcher.setVolume(serverQueue.volume / 100);
-  
-  if(!song.url === 'https://www.youtube.com/watch?v=MK3DWfKJK6I')
-    serverQueue.textChannel.send({
-      embed: {
-      color: "RANDOM",
-      description: `🎶  **|**  Start Playing: **\`${song.title}\`**`
+
+  serverQueue.textChannel.send({
+    embed: {
+    color: "RANDOM",
+    description: `🎶  **|**  Start Playing: **\`${song.title}\`**`
     }
   });
 }
