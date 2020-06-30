@@ -13,6 +13,23 @@ const bot = new Client({
   disableMentions: "all"});
 require("./server.js");
 
+
+
+
+
+bot.commands = new Discord.Collection();
+bot.aliases = new Discord.Collection();
+
+
+
+
+["command"].forEach(handler => { 
+  require(`./handlers/${handler}`)(bot)
+})
+
+
+
+
 bot.on("warn", console.warn);
 bot.on("error", console.error);
 bot.on("ready", () =>
@@ -24,12 +41,70 @@ bot.on('ready', () => {
     bot.user.setActivity('NOD ANAK', { type: "PLAYING"}).catch(console.error);
 })
 
+
+
+
+bot.on("message", async message => {
+  
+    if(message.author.bot) return;
+    if(!message.guild) return;
+    if(!message.content.startsWith(PREFIX)) return;
+    
+       if (!message.member) message.member = await message.guild.fetchMember(message);
+  
+      const args = message.content.slice(PREFIX.length).trim().split(/ +/g);
+      const cmd = args.shift().toLowerCase();
+      
+      if (cmd.length === 0) return;
+      
+      // Get the command
+      let command = bot.commands.get(cmd);
+      // If none is found, try to find it by alias
+      if (!command) command = bot.commands.get(bot.aliases.get(cmd));
+  
+      // If a command is finally found, run the command
+      if (command) 
+          command.run(bot, message, args);
+  
+   
+   })
+
+bot.on('message', async msg => {
+  const args = msg.content.slice(PREFIX.length).split(" ");
+
+  if(msg.author.bot) return;
+  if(!msg.guild) return;
+  
+  const words = require('./commands/Basic/custom_words');
+  words.run(bot, msg, args)
+    
+  switch (args[0]){
+    case 'אני':
+      const אני = require('./commands/Basic/אני.js');
+      אני.run(bot, msg, args)
+      break;
+  }
+  command = args.shift().toLowerCase();
+
+  if(command === 'poll'){
+    const poll = require('./commands/Basic/poll.js');
+    poll.run(bot, msg, args)
+  }
+});
+
+
+
+
+
+
+
+
 bot.on('guildMemberAdd', member =>{
 
-    const channel = member.guild.channels.cache.find(channel => channel.name === "welcome");
-    if(!channel) return;
+    const welcome = member.guild.channels.cache.find(welcome => welcome.name === "welcome");
+    if(!welcome) return;
 
-    channel.send(`? ${channel}מה המצב`)
+    welcome.send(`? ${member}מה המצב`)
 
 });
 
@@ -40,41 +115,7 @@ bot.on("shardDisconnect", (event, id) =>
 );
 bot.on("shardReconnecting", id => console.log(`Shard ${id} reconnecting...`));
 
-bot.on('message', async message => {
-    if(message.author.bot) return;
-    if(!message.guild) return;
-    if(message.content === "אחמד מריו"){
-    message.channel.send("https://www.youtube.com/watch?v=nOCgjuu0xeA")}
-    if(message.content === "שלום"){
-        message.channel.send("השלום לך")}
-    if(message.content === "נאד קטין"){
-        message.channel.send("נאד ענק הוא המלך")}
-    if(message.content === "אמשך"){
-        message.channel.send("כל כך שמנה")}
-    if(message.content === "שו האדא"){
-        message.channel.send("אנא אחמד")}
-    if(message.content === "חנאן כותב יומן"){
-        message.channel.send("איזה טמבל")}
-    if(message.content === "טמבל"){
-        message.channel.send("חנאן כותב יומן")}
-    if(message.content === "בוט"){
-        message.channel.send("וואלאק אני אחמד הבוט הכי גבר")}
-    if(message.content === "סתום תפה אחמד"){
-        message.channel.send("יגזענן רק בגלל שקוראים לי אחמד אתה מייחס אליי ככה נכון?!!!!!!")}
-    if(message.content === "ip"){
-        message.channel.send("nod_katin.aternos.me")}
-    let args = message.content.slice(PREFIX.length).split(" ");
-    switch (args[0]){
-        case 'poll':
-          const poll = require('./commands/poll.js');
-          poll.run(bot, message, args)
-            break;
-        case 'אני':
-          const אני = require('./commands/אני.js');
-          אני.run(bot, message, args)
-            break;
-        }
-});
+
 
 bot.on("message", async msg => {
   // eslint-disable-line
@@ -89,10 +130,6 @@ bot.on("message", async msg => {
   let command = msg.content.toLowerCase().split(" ")[0];
   command = command.slice(PREFIX.length);
 
-  if (command === "help" || command == "cmd") {
-    const Mhelp = require('./commands/MUSIC/help.js');
-    Mhelp.run(bot, msg, args);
-  }
   if (command === "play" || command === "p") {
     const voiceChannel = msg.member.voice.channel;
     if (!voiceChannel)
@@ -116,7 +153,7 @@ bot.on("message", async msg => {
       const videos = await playlist.getVideos();
       for (const video of Object.values(videos)) {
         const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
-        await handleVideo(video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
+        await (video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
       }
       return msg.channel.send(
         `<:yes:591629527571234819>  **|**  Playlist: **\`${playlist.title}\`** has been added to the queue!`
@@ -235,10 +272,11 @@ Please provide a value to select one of the search results ranging from 1-10.
     serverQueue.songs = [];
     serverQueue.connection.dispatcher.end("Stop command has been used!");
     return msg.channel.send("⏹️  **|**  הפסקתי את השיר בשבילך, איזה גבר אני");
-  } else if (command === "volume" || command === "vol") {
+  } 
+  else if (command === "volume" || command === "vol") {
     if (!msg.member.voice.channel)
       return msg.channel.send(
-        "תקשיב, אני צריך שתהיה בחדר שמע כדי שאמשימע לך. מה אני קוסם?"
+        "תקשיב, אני צריך שתהיה בחדר שמע כדי שאשנה לך את עוצמת השמע. מה אני קוסם?"
       );msg.delete({ timeout: 5000 }).catch(console.error);
     if (!serverQueue) return msg.channel.send("אין שום מוזיקה במתנגנת כרגע");
     if (!args[1])

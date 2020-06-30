@@ -7,10 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ."
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zealcordNation/music-bot-example.git"
-  },
   "keywords": [
     "JavaScript",
     "DiscordJS",
@@ -29,6 +25,7 @@
   },
   "dependencies": {
     "@discordjs/opus": "^0.3.2",
+    "ascii-table": "0.0.9",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

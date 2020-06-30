@@ -10,7 +10,12 @@ const cooldown = new Set();
 const youtube = new YouTube(GOOGLE_API_KEY);
 const queue = new Map();
 
-exports.run = async(bot, msg, args) => {
+module.exports = {
+    name: 'help',
+    catagory: 'Basic',
+    description: "Get some help",
+    usage: "ping",
+    run: (bot, message, args) => { 
     const helpembed = new Discord.MessageEmbed()
     .setColor("#7289DA")
     .setDescription(
@@ -21,14 +26,15 @@ __**Commands List**__
 > \`poll\` = help for the poll feature 
 
 **Music Bot Commands List**
-> \`play\` > **\`play [title/url]\`**
-> \`search\` > **\`search [title]\`**
+> **\`play [title/url]\`**
+> **\`search [title]\`**
 > \`skip\`, \`stop\`,  \`pause\`, \`resume\`
 > \`nowplaying\`, \`queue\`, \`volume\``
     )
     .setFooter(
       "©️ SiniMini876",
     );
-  msg.author.send(helpembed);
-  msg.delete({ timeout: 5000 }).catch(console.error);
+    message.author.send(helpembed);
+    message.delete({ timeout: 5000 }).catch(console.error);
+  }
 }
