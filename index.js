@@ -83,18 +83,13 @@ bot.on('message', async msg => {
       const אני = require('./commands/Basic/אני.js');
       אני.run(bot, msg, args)
       break;
-    case 'אני':
-      const אני = require('./commands/Basic/אני.js');
-      אני.run(bot, msg, args)
+    case 'poll':
+      const poll = require('./commands/Basic/poll.js');
+      poll.run(bot, msg, args)
       break;
   }
   command = args.shift().toLowerCase();
 });
-
-
-
-
-
 
 
 
