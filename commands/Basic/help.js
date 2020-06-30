@@ -22,14 +22,19 @@ module.exports = {
       `
 __**Commands List**__
 
-**Poll Commands List**
-> \`poll\` = help for the poll feature 
+**פקודות לסקרים**
+> \`poll\` = וואלק תכתוב poll ואז את השאלה שאתה רוצה לשאול
 
-**Music Bot Commands List**
+**פקודות לפריקינג מוזיקה בחדרים**
 > **\`play [title/url]\`**
 > **\`search [title]\`**
-> \`skip\`, \`stop\`,  \`pause\`, \`resume\`
-> \`nowplaying\`, \`queue\`, \`volume\``
+> \`skip = יעביר לך שיר\`
+> \`stop = יעצור לך את הפריקינג דבר המחורבן הזה\`
+> \`pause = זה כי אני מניאק ואני רוצה שרק תשהה את השיר\`
+> \`resume = זה כי אתה מפגר שרוצה להמשיך עם הזוואות של המוזיקה הישראלית\`
+> \`nowplaying = זה כי אני מגניב שרוצה להראות לך את השיר שמנוגן\`
+> \`queue = זה כי אני מגניב שמראה לך את השירים שבתור\`
+> \`volume = זה כי אני מתחשב בזה שהשיר אולי יחריש לך את האוזניים\``
     )
     .setFooter(
       "©️ SiniMini876",
