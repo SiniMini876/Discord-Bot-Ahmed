@@ -100,10 +100,10 @@ bot.on('message', async msg => {
 
 bot.on('guildMemberAdd', member =>{
 
-    const welcome = member.guild.channels.cache.find(welcome => welcome.name === "welcome");
-    if(!welcome) return;
+    const channel = member.guild.channels.cache.find(channel => channel.name === "welcome");
+    if(!channel) return;
 
-    welcome.send(`? ${member.tag}מה המצב`)
+    channel.send(`? ${member.tag}מה המצב`)
 
 });
 
