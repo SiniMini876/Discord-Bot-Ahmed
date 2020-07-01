@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { Client, Util, MessageEmbed, MessageAttachment } = require("discord.js");
+const { Client, Util, MessageEmbed, MessageAttachment, MessageMentions } = require("discord.js");
 const YouTube = require("simple-youtube-api");
 const ytdl = require("ytdl-core");
 const dotenv = require("dotenv").config();
@@ -102,7 +102,7 @@ bot.on('guildMemberAdd', member =>{
     const channel = member.guild.channels.cache.find(channel => channel.name === "welcome");
     if(!channel) return;
 
-    channel.send(`? ${member.user.tag}מה המצב`)
+    channel.send(`? ${mention.member}מה המצב`)
 
 });
 
