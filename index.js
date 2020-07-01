@@ -11,17 +11,11 @@ const youtube = new YouTube(GOOGLE_API_KEY);
 const queue = new Map();
 const bot = new Client({
   disableMentions: "all"});
-require("./server.js");
-
-
-
+const sr = require("./server.js");
 
 
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
-
-
-
 
 ["command"].forEach(handler => { 
   require(`./handlers/${handler}`)(bot)
@@ -40,9 +34,6 @@ bot.on('ready', () => {
     console.log('This bot is active!');
     bot.user.setActivity('NOD ANAK', { type: "PLAYING"}).catch(console.error);
 })
-
-
-
 
 bot.on("message", async message => {
   
@@ -64,8 +55,7 @@ bot.on("message", async message => {
   
       // If a command is finally found, run the command
       if (command) 
-          command.run(bot, message, args);
-  
+          command.run(bot, message, args, Discord, YouTube, ytdl, dotenv, TOKEN, PREFIX, GOOGLE_API_KEY, cooldown, youtube, queue, sr);
    
    })
 
