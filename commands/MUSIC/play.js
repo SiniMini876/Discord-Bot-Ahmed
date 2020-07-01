@@ -4,7 +4,7 @@ module.exports = {
     catagory: 'MUSIC  ',
     description: "PLAY",
     usage: "play",
-    run: async(bot, msg, args, Discord, YouTube, ytdl, dotenv, TOKEN, PREFIX, GOOGLE_API_KEY, cooldown, youtube, queue, sr, searchString, url, serverQueue, cmd) => { 
+    run: async(bot, msg, args, Discord, YouTube, ytdl, dotenv, TOKEN, PREFIX, GOOGLE_API_KEY, cooldown, youtube, queue, searchString, url, serverQueue, cmd) => { 
 
     const voiceChannel = msg.member.voice.channel;
     if (!voiceChannel)

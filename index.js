@@ -11,7 +11,7 @@ const youtube = new YouTube(GOOGLE_API_KEY);
 const queue = new Map();
 const bot = new Client({
   disableMentions: "all"});
-const sr = require("./server.js");
+require("./server.js");
 
 
 bot.commands = new Discord.Collection();
@@ -58,7 +58,7 @@ bot.on("message", async msg => {
   
       // If a command is finally found, run the command
       if (command) 
-          command.run(bot, msg, args, Discord, YouTube, ytdl, dotenv, TOKEN, PREFIX, GOOGLE_API_KEY, cooldown, youtube, queue, sr, searchString, url, serverQueue, cmd);
+          command.run(bot, msg, args, Discord, YouTube, ytdl, dotenv, TOKEN, PREFIX, GOOGLE_API_KEY, cooldown, youtube, queue, searchString, url, serverQueue, cmd);
    
    })
 
