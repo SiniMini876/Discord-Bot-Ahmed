@@ -15,7 +15,7 @@ module.exports = {
     catagory: 'Basic',
     description: "Get some help",
     usage: "ping",
-    run: (bot, message, args) => { 
+    run: (bot, msg, args) => { 
     const helpembed = new Discord.MessageEmbed()
     .setColor("#7289DA")
     .setDescription(
@@ -39,7 +39,7 @@ __**Commands List**__
     .setFooter(
       "©️ SiniMini876",
     );
-    message.author.send(helpembed);
-    message.delete({ timeout: 5000 }).catch(console.error);
+    msg.author.send(helpembed);
+    msg.delete({ timeout: 5000 }).catch(console.error);
   }
 }

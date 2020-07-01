@@ -123,17 +123,17 @@ bot.on("message", async msg => {
 
   if (command === "play" || command === "p") {
     const voiceChannel = msg.member.voice.channel;
-    if (!voiceChannel)
+    if (!voiceChannel){
       return msg.channel.send(
         "תקשיב, אני צריך שתהיה בחדר שמע כדי שאשמיע לך. מה אני קוסם?"
-      );
-      msg.delete({ timeout: 5000 }).catch(console.error);
+      );msg.delete({ timeout: 5000 }).catch(console.error);}
+      
     const permissions = voiceChannel.permissionsFor(msg.client.user);
     if (!permissions.has("CONNECT")) {
       return msg.channel.send(
         "Sorry, but I need **`CONNECT`** permissions to proceed!"
-      );
-    }msg.delete({ timeout: 5000 }).catch(console.error);
+      ); msg.delete({ timeout: 5000 }).catch(console.error);
+    }
     if (!permissions.has("SPEAK")) {
       return msg.channel.send(
         "Sorry, but I need **`SPEAK`** permissions to proceed!"
@@ -147,7 +147,7 @@ bot.on("message", async msg => {
         await (video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
       }
       return msg.channel.send(
-        `<:yes:591629527571234819>  **|**  Playlist: **\`${playlist.title}\`** has been added to the queue!`
+        ` **|**  Playlist: **\`${playlist.title}\`** has been added to the queue!`
       );
     } else {
       try {
