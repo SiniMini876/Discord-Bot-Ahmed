@@ -102,7 +102,7 @@ bot.on('guildMemberAdd', member =>{
     const channel = member.guild.channels.cache.find(channel => channel.name === "welcome");
     if(!channel) return;
 
-    channel.send(`? ${member.mention}מה המצב`)
+    channel.send(`? ${mention.member.tag}מה המצב`)
 
 });
 
