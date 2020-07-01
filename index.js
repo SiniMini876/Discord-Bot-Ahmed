@@ -103,7 +103,7 @@ bot.on('guildMemberAdd', member =>{
     const welcome = member.guild.channels.cache.find(welcome => welcome.name === "welcome");
     if(!welcome) return;
 
-    welcome.send(`? ${member}מה המצב`)
+    welcome.send(`? ${member.tag}מה המצב`)
 
 });
 
