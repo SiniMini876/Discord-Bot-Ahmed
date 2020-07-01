@@ -11,7 +11,7 @@ const youtube = new YouTube(GOOGLE_API_KEY);
 const queue = new Map();
 const bot = new Client({
   disableMentions: "all"});
-const sr = require("C:/Users/yoavs/Documents/GitHub/ahmed-bot/server.js");
+const sr = require("./server.js");
 module.exports = {
     name: 'play',
     catagory: 'MUSIC  ',
