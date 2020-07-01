@@ -11,9 +11,16 @@ const youtube = new YouTube(GOOGLE_API_KEY);
 const queue = new Map();
 const bot = new Client({
   disableMentions: "all"});
+const sr = require("C:/Users/yoavs/Documents/GitHub/ahmed-bot/server.js");
+module.exports = {
+    name: 'play',
+    catagory: 'MUSIC  ',
+    description: "PLAY",
+    usage: "play",
+    run: async(bot, msg, args, Discord, YouTube, ytdl, dotenv, TOKEN, PREFIX, GOOGLE_API_KEY, cooldown, youtube, queue, sr) => { 
 
 
-    run: async(bot, msg, args, youtube, url, searchString) => { 
+
     const voiceChannel = msg.member.voice.channel;
     if (!voiceChannel)
       return msg.channel.send(
@@ -61,4 +68,5 @@ const bot = new Client({
       }
       return handleVideo(video, msg, voiceChannel);
     }
+}
 }

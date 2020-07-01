@@ -35,15 +35,15 @@ bot.on('ready', () => {
     bot.user.setActivity('NOD ANAK', { type: "PLAYING"}).catch(console.error);
 })
 
-bot.on("message", async message => {
+bot.on("message", async msg => {
   
-    if(message.author.bot) return;
-    if(!message.guild) return;
-    if(!message.content.startsWith(PREFIX)) return;
+    if(msg.author.bot) return;
+    if(!msg.guild) return;
+    if(!msg.content.startsWith(PREFIX)) return;
     
-       if (!message.member) message.member = await message.guild.fetchMember(message);
+       if (!msg.member) msg.member = await msg.guild.fetchMember(msg);
   
-      const args = message.content.slice(PREFIX.length).trim().split(/ +/g);
+      const args = msg.content.slice(PREFIX.length).trim().split(/ +/g);
       const cmd = args.shift().toLowerCase();
       
       if (cmd.length === 0) return;
@@ -55,7 +55,7 @@ bot.on("message", async message => {
   
       // If a command is finally found, run the command
       if (command) 
-          command.run(bot, message, args, Discord, YouTube, ytdl, dotenv, TOKEN, PREFIX, GOOGLE_API_KEY, cooldown, youtube, queue, sr);
+          command.run(bot, msg, args, Discord, YouTube, ytdl, dotenv, TOKEN, PREFIX, GOOGLE_API_KEY, cooldown, youtube, queue, sr);
    
    })
 
@@ -118,55 +118,7 @@ bot.on("message", async msg => {
   let command = msg.content.toLowerCase().split(" ")[0];
   command = command.slice(PREFIX.length);
 
-  if (command === "play" || command === "p") {
-    const voiceChannel = msg.member.voice.channel;
-    if (!voiceChannel)
-      return msg.channel.send(
-        "תקשיב, אני צריך שתהיה בחדר שמע כדי שאשמיע לך. מה אני קוסם?"
-      );
-      msg.delete({ timeout: 5000 }).catch(console.error);
-    const permissions = voiceChannel.permissionsFor(msg.client.user);
-    if (!permissions.has("CONNECT")) {
-      return msg.channel.send(
-        "Sorry, but I need **`CONNECT`** permissions to proceed!"
-      );
-    }msg.delete({ timeout: 5000 }).catch(console.error);
-    if (!permissions.has("SPEAK")) {
-      return msg.channel.send(
-        "Sorry, but I need **`SPEAK`** permissions to proceed!"
-      );
-    }msg.delete({ timeout: 5000 }).catch(console.error);
-    if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
-      const playlist = await youtube.getPlaylist(url);
-      const videos = await playlist.getVideos();
-      for (const video of Object.values(videos)) {
-        const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
-        await (video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
-      }
-      return msg.channel.send(
-        `<:yes:591629527571234819>  **|**  Playlist: **\`${playlist.title}\`** has been added to the queue!`
-      );
-    } else {
-      try {
-        var video = await youtube.getVideo(url);
-      } catch (error) {
-        try {
-          var videos = await youtube.searchVideos(searchString, 10);
-          var video = await youtube.getVideoByID(videos[0].id);
-          if (!video)
-            return msg.channel.send(
-              "🆘  **|**  לא מצאתי כלום, תחפש משהו אחר כי אם לא אני אפליץ עליך"
-            );
-        } catch (err) {
-          console.error(err);
-          return msg.channel.send(
-            "🆘  **|**  לא מצאתי כלום, תחפש משהו אחר כי אם לא אני אפליץ עליך"
-          );
-        }
-      }
-      return handleVideo(video, msg, voiceChannel);
-    }
-  }
+
   if (command === "search" || command === "sc") {
     const voiceChannel = msg.member.voice.channel;
     if (!voiceChannel)
