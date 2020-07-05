@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const { Client, Util, MessageEmbed, MessageAttachment, MessageMentions } = require("discord.js");
 const dotenv = require("dotenv").config();
 const TOKEN = process.env.BOT_TOKEN;
-const PREFIX = process.env.PREFIX;
+const PREFIX = '';
 const cooldown = new Set();
 const bot = new Client({
   disableMentions: "all"});
