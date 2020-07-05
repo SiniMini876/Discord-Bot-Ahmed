@@ -1,12 +1,29 @@
 const Discord = require("discord.js");
-const { Client, Util, MessageEmbed, MessageAttachment, MessageMentions } = require("discord.js");
+
+const { Client, Util, MessageEmbed, MessageAttachment, MessageMentions, Collection } = require("discord.js");
+
 const dotenv = require("dotenv").config();
+
 const TOKEN = process.env.BOT_TOKEN;
+
 const PREFIX = '';
+
+const fs = require("fs");
+
 const cooldown = new Set();
+
 const bot = new Client({
   disableMentions: "all"});
 require("./server.js");
+
+bot.commands = new Discord.Collection();
+
+  const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+  for(const file of commandFiles){
+    const command = require(`./commands/${file}`);
+
+  bot.commands.set(command.name, command);
+}
 
 bot.on("warn", console.warn);
 bot.on("error", console.error);
@@ -29,6 +46,9 @@ bot.on('message', async msg => {
   words.run(bot, msg, args)
     
   switch (args[0]){
+    case 'ping':
+      bot.commands.get('ping').execute(msg, args)
+      break;
     case 'אני':
       const אני = require('./commands/Basic/אני.js');
       אני.run(bot, msg, args)
