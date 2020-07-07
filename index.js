@@ -4,6 +4,8 @@ const { Client, Util, MessageEmbed, MessageAttachment, MessageMentions, Collecti
 
 const dotenv = require("dotenv").config();
 
+const ms = require('ms');
+
 const TOKEN = process.env.BOT_TOKEN;
 
 const PREFIX = '';
@@ -36,6 +38,10 @@ bot.on('ready', () => {
     bot.user.setActivity('NOD ANAK', { type: "PLAYING"}).catch(console.error);
 })
 
+bot.on('guildMemberAdd', member => {
+  member.roles.add('MEMBER');
+});
+
 bot.on('message', async msg => {
   const args = msg.content.slice(PREFIX.length).split(" ");
 
@@ -46,6 +52,32 @@ bot.on('message', async msg => {
   words.run(bot, msg, args)
     
   switch (args[0]){
+    case '!mute':
+      var person = msg.guild.member(msg.mentions.users.first() || msg.guild.members.get(args[1]))
+      if(!person) return;
+
+      var mainrole = msg.guild.roles.cache.find(role => role.name === 'MEMBER');
+      var muterole = msg.guild.roles.cache.find(role => role.name === 'MUTE');
+
+      if(!muterole) return msg.channel.send("סורי, לא מצאתי את הרול של המיוט");
+
+      var time = args[2]
+
+      if(!time) return msg.channel.send("אין זמן");
+
+      person.roles.remove(mainrole.id);
+      person.roles.add(muterole.id);
+
+      msg.channel.send(`@${person.user.tag} הלך לישון ל ${ms(ms(time))}`)
+
+      setTimeout(function(){
+        person.roles.add(mainrole.id);
+        person.roles.remove(muterole.id);
+        msg.channel.send(`@${person.user.tag} קם מהשינה`)
+      }, ms(time))
+
+
+      break;
     case 'ping':
       bot.commands.get('ping').execute(msg, args)
       break;
