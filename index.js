@@ -15,7 +15,8 @@ const fs = require("fs");
 const cooldown = new Set();
 
 const bot = new Client({
-  disableMentions: "all"});
+  partials: ['MESSAGE', 'REACTION']
+});
 require("./server.js");
 
 bot.commands = new Discord.Collection();
@@ -37,6 +38,40 @@ bot.on('ready', () => {
     console.log('This bot is active!');
     bot.user.setActivity('NOD ANAK', { type: "PLAYING"}).catch(console.error);
 })
+
+bot.on('messageReactionAdd', async (reaction, user) => {
+  
+  let applyRole = async () => {
+    let emojiName = reaction.emoji.name;
+    let role = reaction.message.guild.roles.cache.find(role => role.name.toLowerCase() === emojiName.toLowerCase());
+    let member = reaction.message.guild.members.cache.find(member => member.id === user.id);
+    try {
+    if(role && member){
+      console.log("Role and Member are found.");
+      await member.roles.add(role);
+      console.log('The member has given the role "Member".');
+      }
+    } catch(err){
+      console.log(err);
+    }
+  }
+  if(reaction.message.partial){
+    try{
+    var msg = await reaction.message.fetch();
+    if(msg.id === '730092332879446086'){
+      console.log('Cached')
+      applyRole();
+    }
+  }catch(err) {
+    console.log(err);
+    }
+  }else{
+    console.log('Not a partial')
+    if(reaction.message.id === '730092332879446086'){
+      applyRole();
+    }
+  }
+});
 
 bot.on('guildMemberAdd', member => {
   member.roles.add('MEMBER');
@@ -77,6 +112,10 @@ bot.on('message', async msg => {
       }, ms(time))
 
 
+      break;
+    case 'rules':
+      const rule = require('./commands/Basic/rules.js');
+      rule.run(bot, msg, args)
       break;
     case 'ping':
       bot.commands.get('ping').execute(msg, args)
