@@ -16,22 +16,7 @@ module.exports = {
     description: "Get some help",
     usage: "ping",
     run: (bot, msg, args) => { 
-    const rulesembed = new Discord.MessageEmbed()
-    .setColor("#7289DA")
-    .setDescription(
-      `
-__**חוקים לשרת הדיסוקרד - Buganim**__
-
-> **\`1. לא להספים\`**
-> **\`2. לא להספים את הבוטים\`**
-> \`3. תשתמשו בבוטים הם אחלה\`
-> \`4. מה זה שרת של יוטיובר? תעשו מה שבא אין לי כוח\``
-    )
-    .setFooter(
-      "©️ SiniMini876",
-    );
-    msg.channel.send(rulesembed);
-    msg.channel.send("כדי להצטרף לשרת אנא לחץ על האימוג'י המפחיד שמתחת להודעה.");
+    msg.channel.send("**כדי להצטרף לשרת אנא הישבע אמונים לצ'ינגצ'אנגצ'ונג על ידי לחיצה על האימוג'י המפחיד שמתחת להודעה.**");
     msg.delete({ timeout: 5000 }).catch(console.error);
   }
 }
