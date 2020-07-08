@@ -16,7 +16,7 @@ module.exports = {
     description: "Get some help",
     usage: "ping",
     run: (bot, msg, args) => { 
-    msg.channel.send("**כדי להצטרף לשרת אנא הישבע אמונים לצ'ינגצ'אנגצ'ונג על ידי לחיצה על האימוג'י המפחיד שמתחת להודעה.**");
+    msg.channel.send("**כדי להצטרף לשרת אנא הישבע אמונים לצ'ינגאצ'וג על ידי לחיצה על האימוג'י המפחיד שמתחת להודעה.**");
     msg.delete({ timeout: 5000 }).catch(console.error);
   }
 }

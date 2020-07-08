@@ -58,7 +58,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
   if(reaction.message.partial){
     try{
     var msg = await reaction.message.fetch();
-    if(msg.id === '730135017870590084'){
+    if(msg.id === '730381895132643328'){
       console.log('Cached')
       applyRole();
     }
@@ -67,7 +67,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
     }
   }else{
     console.log('Not a partial')
-    if(reaction.message.id === '730135017870590084'){
+    if(reaction.message.id === '730381895132643328'){
       applyRole();
     }
   }
