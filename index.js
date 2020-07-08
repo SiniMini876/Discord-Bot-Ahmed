@@ -41,36 +41,9 @@ bot.on('ready', () => {
 
 bot.on('messageReactionAdd', async (reaction, user) => {
   
-  let applyRole = async () => {
-    let emojiName = reaction.emoji.name;
-    let role = reaction.message.guild.roles.cache.find(role => role.name.toLowerCase() === emojiName.toLowerCase());
-    let member = reaction.message.guild.members.cache.find(member => member.id === user.id);
-    try {
-    if(role && member){
-      console.log("Role and Member are found.");
-      await member.roles.add(role);
-      console.log('The member has given the role "Member".');
-      }
-    } catch(err){
-      console.log(err);
-    }
-  }
-  if(reaction.message.partial){
-    try{
-    var msg = await reaction.message.fetch();
-    if(msg.id === '730381895132643328'){
-      console.log('Cached')
-      applyRole();
-    }
-  }catch(err) {
-    console.log(err);
-    }
-  }else{
-    console.log('Not a partial')
-    if(reaction.message.id === '730381895132643328'){
-      applyRole();
-    }
-  }
+  const react = require('./commands/Settings/rules.js');
+  react.run(bot, reaction, user);
+
 });
 
 bot.on('guildMemberAdd', member => {
@@ -88,30 +61,8 @@ bot.on('message', async msg => {
     
   switch (args[0]){
     case '!mute':
-      var person = msg.guild.member(msg.mentions.users.first() || msg.guild.members.get(args[1]))
-      if(!person) return;
-
-      var mainrole = msg.guild.roles.cache.find(role => role.name === 'MEMBER');
-      var muterole = msg.guild.roles.cache.find(role => role.name === 'MUTE');
-
-      if(!muterole) return msg.channel.send("סורי, לא מצאתי את הרול של המיוט");
-
-      var time = args[2]
-
-      if(!time) return msg.channel.send("אין זמן");
-
-      person.roles.remove(mainrole.id);
-      person.roles.add(muterole.id);
-
-      msg.channel.send(`@${person.user.tag} הלך לישון ל ${ms(ms(time))}`)
-
-      setTimeout(function(){
-        person.roles.add(mainrole.id);
-        person.roles.remove(muterole.id);
-        msg.channel.send(`@${person.user.tag} קם מהשינה`)
-      }, ms(time))
-
-
+      const mute = require('./commands/Basic/mute.js');
+      mute.run(bot, msg, args, ms)
       break;
     case 'rules':
       const rule = require('./commands/Basic/rules.js');
