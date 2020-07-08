@@ -2,17 +2,13 @@ const Discord = require("discord.js");
 
 const { Client, Util, MessageEmbed, MessageAttachment, MessageMentions, Collection } = require("discord.js");
 
-const dotenv = require("dotenv").config();
-
 const ms = require('ms');
 
 const TOKEN = process.env.BOT_TOKEN;
 
-const PREFIX = '';
+const PREFIX = process.env.PREFIX;
 
 const fs = require("fs");
-
-const cooldown = new Set();
 
 const bot = new Client({
   partials: ['MESSAGE', 'REACTION']
@@ -28,8 +24,6 @@ bot.commands = new Discord.Collection();
   bot.commands.set(command.name, command);
 }
 
-bot.on("warn", console.warn);
-bot.on("error", console.error);
 bot.on("ready", () =>
   console.log(`${bot.user.tag} has been successfully turned on!`)
 );
@@ -44,10 +38,6 @@ bot.on('messageReactionAdd', async (reaction, user) => {
   const react = require('./commands/Settings/rules.js');
   react.run(bot, reaction, user);
 
-});
-
-bot.on('guildMemberAdd', member => {
-  member.roles.add('MEMBER');
 });
 
 bot.on('message', async msg => {

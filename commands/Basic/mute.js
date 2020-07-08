@@ -39,6 +39,7 @@ module.exports = {
           person.roles.remove(muterole.id);
           msg.channel.send(`${person} קם מהשינה`)
         }, ms(time))
+        msg.delete({ timeout: 5000 }).catch(console.error);
 
   }
 }
