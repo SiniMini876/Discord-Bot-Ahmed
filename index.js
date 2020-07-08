@@ -54,7 +54,7 @@ bot.on('message', async msg => {
       const mute = require('./commands/Basic/mute.js');
       mute.run(bot, msg, args, ms)
       break;
-    case 'rules':
+    case '!rules':
       const rule = require('./commands/Basic/rules.js');
       rule.run(bot, msg, args)
       break;
@@ -65,7 +65,7 @@ bot.on('message', async msg => {
       const אני = require('./commands/Basic/אני.js');
       אני.run(bot, msg, args)
       break;
-    case 'poll':
+    case '!poll':
       const poll = require('./commands/Basic/poll.js');
       poll.run(bot, msg, args)
       break;

@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 const { Client, Util, MessageEmbed, MessageAttachment } = require("discord.js");
 
 exports.run = async(bot, msg, args) => {
+    if(args[0] === 'אני'){
+        msg.channel.send(`שלום לך ${args[1]} אני אחמד`)}
     if(msg.content === 'שתוק כבר אחמד'){
         msg.channel.send('לא משנה אני מצטער על נכותי')}
 
