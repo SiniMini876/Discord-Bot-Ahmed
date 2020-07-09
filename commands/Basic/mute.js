@@ -21,26 +21,32 @@ module.exports = {
         var muterole = msg.guild.roles.cache.find(role => role.name === 'MUTE');
         var policerole = msg.guild.roles.cache.find(role => role.name === 'POLICE');
         var shingrole = msg.guild.roles.cache.find(role => role.name === 'שינגעלינג');
+        var shing = person.roles.cache.find(role => role.name === 'שינגעלינג');
+        var OP = person.roles.cache.find(role => role.name === 'OP');
+        
+        if(!msg.member.roles.cache.find(r => r.name === "OP")) return msg.channel.send('סורי אחי, אין לך רשות לעשות מעשה שכזה. יבומר');
         
         if(!muterole) return msg.channel.send("סורי, לא מצאתי את הרול של המיוט");
   
         var time = args[2]
   
         if(!time) return msg.channel.send("אין זמן");
-  
+
         person.roles.remove(mainrole.id);
-        person.roles.remove(shingrole).catch(err);
+        if(shing){
+          person.roles.remove(shingrole.id)};
         person.roles.add(muterole.id);
   
         msg.channel.send(`${person} הלך לישון ל ${ms(ms(time))}`)
   
         setTimeout(function(){
           person.roles.add(mainrole.id);
-          person.roles.add(shingrole.id).catch(err);
+          if(shing){
+            person.roles.add(shingrole.id)};
           person.roles.remove(muterole.id);
           msg.channel.send(`${person} קם מהשינה`)
         }, ms(time))
-        msg.delete({ timeout: 5000 }).catch(console.error);
+        msg.delete({ timeout: 5000 }).catch(console.error());
 
   }
 }

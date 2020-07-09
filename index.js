@@ -4,9 +4,9 @@ const { Client, Util, MessageEmbed, MessageAttachment, MessageMentions, Collecti
 
 const ms = require('ms');
 
-const TOKEN = process.env.BOT_TOKEN;
+const TOKEN = 'NzIwMjgzNTI4NDQ4ODM1Njg2.XvSvIQ.RqtV2kSrZX25I6fquQBgYxsZ350';
 
-const PREFIX = process.env.PREFIX;
+const PREFIX = '!';
 
 const fs = require("fs");
 
