@@ -29,13 +29,14 @@ module.exports = {
         if(!time) return msg.channel.send("אין זמן");
   
         person.roles.remove(mainrole.id);
-
+        person.roles.remove(shingrole).catch(err);
         person.roles.add(muterole.id);
   
         msg.channel.send(`${person} הלך לישון ל ${ms(ms(time))}`)
   
         setTimeout(function(){
           person.roles.add(mainrole.id);
+          person.roles.add(shingrole.id).catch(err);
           person.roles.remove(muterole.id);
           msg.channel.send(`${person} קם מהשינה`)
         }, ms(time))

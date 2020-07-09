@@ -50,22 +50,22 @@ bot.on('message', async msg => {
   words.run(bot, msg, args)
     
   switch (args[0]){
-    case '!mute':
+    case 'mute':
       const mute = require('./commands/Basic/mute.js');
       mute.run(bot, msg, args, ms)
       break;
-    case '!rules':
+    case 'rules':
       const rule = require('./commands/Basic/rules.js');
       rule.run(bot, msg, args)
       break;
     case 'ping':
-      bot.commands.get('ping').execute(msg, args)
+      bot.commands.get('ping').execute(msg, args);
       break;
     case 'אני':
       const אני = require('./commands/Basic/אני.js');
       אני.run(bot, msg, args)
       break;
-    case '!poll':
+    case 'poll':
       const poll = require('./commands/Basic/poll.js');
       poll.run(bot, msg, args)
       break;
