@@ -4,7 +4,7 @@ const { Client, Util, MessageEmbed, MessageAttachment, MessageMentions, Collecti
 
 const ms = require('ms');
 
-const config = require('./config.json');
+const config = require('./commands/Settings/config.json');
 
 const Hero_TOKEN = process.env.BOT_TOKEN;
 
@@ -70,4 +70,4 @@ bot.on('message', async msg => {
   command = args.shift().toLowerCase();
 });
 
-bot.login(Hero_TOKEN);
+bot.login(PC_TOKEN);
