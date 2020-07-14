@@ -1,4 +1,4 @@
-./commands/Settings/config.json
+config.json
 # Logs
 logs
 *.log
