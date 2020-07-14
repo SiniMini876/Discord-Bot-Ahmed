@@ -9,11 +9,10 @@ const queue = new Map();
 
 module.exports = {
     name: 'mute',
-    catagory: 'Basic',
     description: "mute someone",
-    usage: "mute",
     run: (bot, msg, args, ms) => { 
 
+        // creating a person variable
         var person = msg.guild.member(msg.mentions.users.first() || msg.guild.members.get(args[1]))
         if(!person) return;
   
@@ -24,21 +23,26 @@ module.exports = {
         var shing = person.roles.cache.find(role => role.name === 'שינגעלינג');
         var OP = person.roles.cache.find(role => role.name === 'OP');
         
+        // check if the member has OP role.
         if(!msg.member.roles.cache.find(r => r.name === "OP")) return msg.channel.send('סורי אחי, אין לך רשות לעשות מעשה שכזה. יבומר');
         
+        // check if there is a role named MUTE
         if(!muterole) return msg.channel.send("סורי, לא מצאתי את הרול של המיוט");
-  
+
         var time = args[2]
   
         if(!time) return msg.channel.send("אין זמן");
 
         person.roles.remove(mainrole.id);
+
+        // check if the member has shingaling role
         if(shing){
           person.roles.remove(shingrole.id)};
         person.roles.add(muterole.id);
   
         msg.channel.send(`${person} הלך לישון ל ${ms(ms(time))}`)
-  
+        
+        // after the time that the member write the bot gives the mute member his roles back.
         setTimeout(function(){
           person.roles.add(mainrole.id);
           if(shing){

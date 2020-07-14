@@ -4,25 +4,19 @@ const { Client, Util, MessageEmbed, MessageAttachment, MessageMentions, Collecti
 
 const ms = require('ms');
 
-const TOKEN = process.env.BOT_TOKEN;
+const config = require('./config.json');
 
-const PREFIX = process.env.PREFIX;
+const Hero_TOKEN = process.env.BOT_TOKEN;
+
+const PC_TOKEN = config.TOKEN;
+
+const PREFIX = '!';
 
 const fs = require("fs");
 
 const bot = new Client({
   partials: ['MESSAGE', 'REACTION']
 });
-require("./server.js");
-
-bot.commands = new Discord.Collection();
-
-  const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-  for(const file of commandFiles){
-    const command = require(`./commands/${file}`);
-
-  bot.commands.set(command.name, command);
-}
 
 bot.on("ready", () =>
   console.log(`${bot.user.tag} has been successfully turned on!`)
@@ -41,6 +35,7 @@ bot.on('messageReactionAdd', async (reaction, user) => {
 });
 
 bot.on('message', async msg => {
+
   const args = msg.content.slice(PREFIX.length).split(" ");
 
   if(msg.author.bot) return;
@@ -57,13 +52,6 @@ bot.on('message', async msg => {
     case 'rules':
       const rule = require('./commands/Basic/rules.js');
       rule.run(bot, msg, args)
-      break;
-    case 'ping':
-      bot.commands.get('ping').execute(msg, args);
-      break;
-    case 'אני':
-      const אני = require('./commands/Basic/אני.js');
-      אני.run(bot, msg, args)
       break;
     case 'poll':
       const poll = require('./commands/Basic/poll.js');
@@ -82,4 +70,4 @@ bot.on('message', async msg => {
   command = args.shift().toLowerCase();
 });
 
-bot.login(TOKEN);
+bot.login(PC_TOKEN);
