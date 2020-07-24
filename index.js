@@ -4,7 +4,9 @@ const { Client, Util, MessageEmbed, MessageAttachment, MessageMentions, Collecti
 
 const ms = require('ms');
 
-const config = require('./commands/Settings/config.json');
+const mc = require('minecraft-server-util');
+
+const config = require('./config.json');
 
 const Hero_TOKEN = process.env.BOT_TOKEN;
 
@@ -12,14 +14,14 @@ const PC_TOKEN = config.TOKEN;
 
 const PREFIX = '!';
 
-const fs = require("fs");
-
 const bot = new Client({
   partials: ['MESSAGE', 'REACTION']
 });
 
-bot.on("ready", () =>
+bot.on("ready", () => {
   console.log(`${bot.user.tag} has been successfully turned on!`)
+
+  }
 );
 
 bot.on('ready', () => {
@@ -41,10 +43,14 @@ bot.on('message', async msg => {
   if(msg.author.bot) return;
   if(!msg.guild) return;
   
-  const words = require('./commands/Basic/custom_words');
+  const words = require('./commands/Basic/custom_words.js');
   words.run(bot, msg, args)
     
   switch (args[0]){
+    case 'nod':
+      const nod = require('./commands/Basic/nod_anak.js');
+      nod.run(bot, msg, args, mc)
+      break;
     case 'mute':
       const mute = require('./commands/Basic/mute.js');
       mute.run(bot, msg, args, ms)
@@ -70,4 +76,4 @@ bot.on('message', async msg => {
   command = args.shift().toLowerCase();
 });
 
-bot.login(Hero_TOKEN);
+bot.login(PC_TOKEN);
