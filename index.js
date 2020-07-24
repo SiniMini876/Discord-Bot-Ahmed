@@ -58,4 +58,4 @@ bot.on('message', (msg) => {
   command = args.shift().toLowerCase();
 });
 
-bot.login(Hero_TOKEN);
+bot.login('NzIwMjgzNTI4NDQ4ODM1Njg2.XvSvIQ.RqtV2kSrZX25I6fquQBgYxsZ350');
