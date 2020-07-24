@@ -7,7 +7,7 @@ module.exports = {
     description: "Get some help",
     run: (bot, mc, msg, args) => { 
         setInterval(() => {
-            mc('play.hypixel.net', 25565, (error, response) => {
+            mc('Nod_Anak.aternos.me', 25565, (error, response) => {
                 if(error) throw error
                 console.log(response)
                 const nodem = new Discord.MessageEmbed()
