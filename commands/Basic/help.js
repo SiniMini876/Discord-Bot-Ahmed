@@ -1,25 +1,26 @@
 const Discord = require("discord.js");
 const { Client, Util, MessageEmbed, MessageAttachment } = require("discord.js");
 
-module.exports = {
-    name: 'help',
-    catagory: 'Basic',
-    description: "Get some help",
-    usage: "ping",
-    run: (bot, msg, args) => { 
-    const helpembed = new Discord.MessageEmbed()
-    .setColor("#7289DA")
-    .setDescription(
+module.exports = class help {
+  constructor(){
+    this.name = 'help',
+    this.alias = ['h'],
+    this.usage = '!help'
+  }
+    run(bot, msg, args, ms, mc){ 
+      const helpembed = new Discord.MessageEmbed()
+      .setColor("#7289DA")
+      .setDescription(
       `
 __**Commands List**__
-
+    
 **חשוב מאוד להבהיר, כל פקודה מתחילה ב-!**
-
+    
 **פקודות לסקרים**
 > \`!poll\` = וואלק תכתוב poll ואז את השאלה שאתה רוצה לשאול
-
+    
 **פקודות לפריקינג מוזיקה בחדרים**
-
+    
 > **\`!play [title/url]\`**
 > **\`!search [title]\`**
 > \`!skip = יעביר לך שיר\`
@@ -29,11 +30,11 @@ __**Commands List**__
 > \`!nowplaying = זה כי אני מגניב שרוצה להראות לך את השיר שמנוגן\`
 > \`!queue = זה כי אני מגניב שמראה לך את השירים שבתור\`
 > \`!volume = זה כי אני מתחשב בזה שהשיר אולי יחריש לך את האוזניים\``
-    )
-    .setFooter(
-      "©️ SiniMini876",
-    );
-    msg.author.send(helpembed);
-    msg.delete({ timeout: 5000 }).catch(console.error);
-  }
+      )
+      .setFooter(
+        "©️ SiniMini876",
+      );
+      msg.author.send(helpembed);
+      msg.delete({ timeout: 5000 }).catch(console.error);
+    }
 }

@@ -2,10 +2,13 @@ const Discord = require("discord.js");
 const { Client, Util, MessageEmbed, MessageAttachment } = require("discord.js");
 const { response } = require("express");
 
-module.exports = {
-    name: 'help',
-    description: "Get some help",
-    run: (bot, mc, msg, args) => { 
+module.exports = class help {
+    constructor(){
+    this.name = 'help',
+    this.alias = 'h',
+    this.usage = '!help'
+    }
+    run(bot, mc, msg, args, ms){ 
         setInterval(() => {
             mc('Nod_Anak.aternos.me', 25565, (error, response) => {
                 if(error) throw error

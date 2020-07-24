@@ -7,10 +7,13 @@ const PREFIX = process.env.PREFIX;
 const cooldown = new Set();
 const queue = new Map();
 
-module.exports = {
-    name: 'mute',
-    description: "mute someone",
-    run: (bot, msg, args, ms) => { 
+module.exports = class mute {
+  constructor(){
+    this.name = 'mute',
+    this.alias = ['m'],
+    this.usage = '!mute'
+  }
+    run(bot, msg, args, ms, mc){ 
 
         // creating a person variable
         var person = msg.guild.member(msg.mentions.users.first() || msg.guild.members.get(args[1]))
