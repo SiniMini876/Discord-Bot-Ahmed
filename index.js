@@ -58,4 +58,4 @@ bot.on('message', (msg) => {
   command = args.shift().toLowerCase();
 });
 
-bot.login(PC_TOKEN);
+bot.login(Hero_TOKEN);
