@@ -1,11 +1,5 @@
 const Discord = require("discord.js");
 const { Client, Util, MessageEmbed, MessageAttachment } = require("discord.js");
-const YouTube = require("simple-youtube-api");
-const ytdl = require("ytdl-core");
-const dotenv = require("dotenv").config();
-const PREFIX = process.env.PREFIX;
-const cooldown = new Set();
-const queue = new Map();
 
 module.exports = class mute {
   constructor(){
