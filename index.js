@@ -6,13 +6,7 @@ const ms = require('ms');
 
 const mc = require('minecraft-server-util');
 
-try{
-const config = require('./config.json');
-}catch(e){}
-
-const Hero_TOKEN = process.env.BOT_TOKEN;
-
-const PC_TOKEN = config.TOKEN;
+const BOT_TOKEN = process.env.BOT_TOKEN;
 
 const { CommandHandler } = require('djs-commands');
 const CHBasic = new CommandHandler({
@@ -60,4 +54,4 @@ bot.on('message', (msg) => {
   command = args.shift().toLowerCase();
 });
 
-bot.login('NzIwMjgzNTI4NDQ4ODM1Njg2.XvSvIQ.RqtV2kSrZX25I6fquQBgYxsZ350');
+bot.login(BOT_TOKEN);
