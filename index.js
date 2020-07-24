@@ -54,8 +54,7 @@ bot.on('message', (msg) => {
 
   const words = require('./commands/Settings/custom_words.js');
   words.run(bot, msg, args)
-
   command = args.shift().toLowerCase();
 });
 
-bot.login(Hero_TOKEN);
+bot.login(PC_TOKEN);
