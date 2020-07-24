@@ -1,1 +1,1 @@
-Hello Everyone, My "Online Nickname" is SiniMini876 and I am a gamer and now a programmer:), I developed this discord bot for start to programming and it become an hobbie of mine. If you want to take that bot I will be very happy from that. Thanks Everybody!
+Hello Everyone, My "Online Nickname" is SiniMini876 and I am a gamer and now a programmer:), I developed this discord bot to start programming and it become an hobbie of mine. If you want to take that bot I will be very happy from that. Thanks Everybody!
