@@ -6,7 +6,9 @@ const ms = require('ms');
 
 const mc = require('minecraft-server-util');
 
+try{
 const config = require('./config.json');
+}catch(e){}
 
 const Hero_TOKEN = process.env.BOT_TOKEN;
 
