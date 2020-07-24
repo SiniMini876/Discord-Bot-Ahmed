@@ -1,1 +1,1 @@
-Listen, I can't get credit for all of that. I used a template and I degined it. Anyway, This is a Discord Bot that most of him is my job :)
+Hello Everyone, My "Online Nickname" is SiniMini876 and I am a gamer and now a programmer:), I developed this discord bot for start to programming and it become an hobbie of mine. If you want to take that bot I will be very happy from that. Thanks Everybody!
