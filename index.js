@@ -55,7 +55,6 @@ bot.on('message', (msg) => {
     console.log(e)
   }
 
-
   command = args.shift().toLowerCase();
 });
 
