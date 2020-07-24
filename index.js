@@ -35,7 +35,10 @@ bot.on('messageReactionAdd', async (reaction, user) => {
   react.run(bot, reaction, user);
 
 });
-
+bot.on('message', msg => {
+  const words = require('./commands/Settings/custom_words.js');
+  words.run(bot, msg)
+})
 bot.on('message', (msg) => {
 
   if(msg.author.bot) return;
@@ -52,8 +55,7 @@ bot.on('message', (msg) => {
     console.log(e)
   }
 
-  const words = require('./commands/Settings/custom_words.js');
-  words.run(bot, msg, args)
+
   command = args.shift().toLowerCase();
 });
 
