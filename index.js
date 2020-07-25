@@ -35,10 +35,8 @@ bot.on("ready", () => {
 );
 
 bot.on('messageReactionAdd', async (reaction, user) => {
-  
   const react = require('./commands/Settings/rules.js');
   react.run(bot, reaction, user);
-
 });
 bot.on('message', msg => {
   const words = require('./commands/Settings/custom_words.js');
