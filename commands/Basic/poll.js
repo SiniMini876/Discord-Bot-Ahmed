@@ -4,7 +4,6 @@ const { Client, Util, MessageEmbed, MessageAttachment } = require("discord.js");
 module.exports = class poll {
     constructor(){
         this.name = 'poll',
-        this.alias = ['p'],
         this.usage = '!poll'
     }
     run(bot, msg, args,){

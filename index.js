@@ -2,6 +2,8 @@ const Discord = require("discord.js");
 
 const { Client, Util, MessageEmbed, MessageAttachment, MessageMentions, Collection } = require("discord.js");
 
+const dotenv = require('dotenv').config();
+
 const ms = require('ms');
 
 const mc = require('minecraft-server-util');
@@ -22,6 +24,13 @@ const bot = new Client({
 bot.on("ready", () => {
   console.log(`${bot.user.tag} has been successfully turned on!`)
   bot.user.setActivity('NOD ANAK', { type: "PLAYING"}).catch(console.error);
+
+  var textChannel = bot.channels.cache.find(channel => channel.id === '693864295510966315');
+
+  setInterval(() => {
+    var nod = require('./commands/Settings/nod_anak.js')
+    nod.run(bot, mc, textChannel)
+  }, 5400000);
   }
 );
 

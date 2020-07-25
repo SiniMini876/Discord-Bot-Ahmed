@@ -1,7 +1,6 @@
 module.exports = class rules{
   constructor(){
     this.name = 'rules',
-    this.alias = ['r'],
     this.usage = '!rules'
   }
     run(bot, msg, args){ 
