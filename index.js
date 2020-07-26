@@ -25,12 +25,12 @@ bot.on("ready", () => {
   console.log(`${bot.user.tag} has been successfully turned on!`)
   bot.user.setActivity('NOD ANAK', { type: "PLAYING"}).catch(console.error);
 
-  var textChannel = bot.channels.cache.find(channel => channel.id === '693864295510966315');
+  var textChannel = bot.channels.cache.find(channel => channel.id === '719178323200180266');
 
   setInterval(() => {
     var nod = require('./commands/Settings/nod_anak.js')
     nod.run(bot, mc, textChannel)
-  }, 5400000);
+  }, 5000);
   }
 );
 
