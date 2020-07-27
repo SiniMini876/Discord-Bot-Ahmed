@@ -28,9 +28,9 @@ bot.on("ready", () => {
   var textChannel = bot.channels.cache.find(channel => channel.id === '719178323200180266');
 
   setInterval(() => {
-    var nod = require('./commands/Settings/nod_anak.js')
-    nod.run(bot, mc, textChannel)
-  }, 5000);
+    var dog = require('./commands/Settings/dog.js')
+    dog.run(bot, textChannel)
+  }, 86400000);
   }
 );
 
