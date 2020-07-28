@@ -23,7 +23,7 @@ const bot = new Client({
 
 bot.on("ready", () => {
   console.log(`${bot.user.tag} has been successfully turned on!`)
-  bot.user.setActivity('NOD ANAK', { type: "PLAYING"}).catch(console.error);
+  bot.user.setActivity('להרביץ ליהודים', { type: "PLAYING"}).catch(console.error);
 
   var textChannel = bot.channels.cache.find(channel => channel.id === '719178323200180266');
 
