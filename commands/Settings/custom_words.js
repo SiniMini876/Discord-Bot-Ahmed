@@ -4,6 +4,7 @@ const { Client, Util, MessageEmbed, MessageAttachment } = require("discord.js");
 exports.run = async(bot, msg) => {
     if(msg.content === 'שתוק כבר אחמד'){
         msg.channel.send('לא משנה אני מצטער על נכותי')}
+
     if(msg.content === "אחמד מריו"){
         msg.channel.send("https://www.youtube.com/watch?v=nOCgjuu0xeA")}
 
@@ -32,5 +33,5 @@ exports.run = async(bot, msg) => {
         msg.channel.send("יגזענן רק בגלל שקוראים לי אחמד אתה מייחס אליי ככה נכון?!!!!!!")}
         
     if(msg.content === "ip"){
-        msg.channel.send("nod_katin.aternos.me")}
+        msg.channel.send("nod_anak.aternos.me")}
 }
