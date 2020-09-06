@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "node-terminal",
+            "name": "Launch Ahmed",
+            "request": "launch",
+            "command": "npm run Start",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
