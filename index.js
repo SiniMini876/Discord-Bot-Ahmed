@@ -4,6 +4,8 @@ const { Client, Util, MessageEmbed, MessageAttachment, MessageMentions, Collecti
 
 const dotenv = require('dotenv').config();
 
+const mongoose = require('mongoose');
+
 const ms = require('ms');
 
 const mc = require('minecraft-server-util');
@@ -11,6 +13,7 @@ const mc = require('minecraft-server-util');
 const BOT_TOKEN = process.env.BOT_TOKEN;
 
 const { CommandHandler } = require('djs-commands');
+const { connect } = require("superagent");
 const CHBasic = new CommandHandler({
   folder:__dirname + "/commands/Basic/",
   prefix: ['!']
@@ -20,6 +23,8 @@ const PREFIX = '!';
 const bot = new Client({
   partials: ['MESSAGE', 'REACTION']
 });
+
+bot.mongoose = require('./utils/mongoose.js');
 
 bot.on("ready", () => {
   console.log(`${bot.user.tag} has been successfully turned on!`)
@@ -47,10 +52,16 @@ bot.on('message', (msg) => {
   if(msg.author.bot) return;
   if(!msg.guild) return;
 
+  if(msg.member.roles.cache.find(r => r.name === 'חד קרן')){
+    msg.channel.send('אני חושב שראיתי חד קרן מעליי <:ABA:726561158869549186>');
+  }
+
   let args = msg.content.split(" ");
   let command = args[0];
   let cmd = CHBasic.getCommand(command);
   if(!cmd) return
+
+
 
   try{
     cmd.run(bot, msg, args, ms, mc);
@@ -61,5 +72,5 @@ bot.on('message', (msg) => {
   command = args.shift().toLowerCase();
 });
 
-
+bot.mongoose.init();
 bot.login(BOT_TOKEN);
