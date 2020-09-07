@@ -68,4 +68,6 @@ bot.on('message', (msg) => {
   command = args.shift().toLowerCase();
 });
 
+
+
 bot.login(BOT_TOKEN);

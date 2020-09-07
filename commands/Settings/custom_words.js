@@ -34,4 +34,11 @@ exports.run = async(bot, msg) => {
         
     if(msg.content === "ip"){
         msg.channel.send("nod_anak.aternos.me")}
+
+    if(msg.content === 'אגדו'){
+        msg.channel.send('אני קופץ מצוק.')
+        bot.destroy();
+        setTimeout(function(){console.log('Hi')}, 10000)
+        bot.login(process.env.BOT_TOKEN)
+    }
 }
