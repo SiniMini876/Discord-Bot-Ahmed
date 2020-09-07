@@ -4,8 +4,6 @@ const { Client, Util, MessageEmbed, MessageAttachment, MessageMentions, Collecti
 
 const dotenv = require('dotenv').config();
 
-const mongoose = require('mongoose');
-
 const ms = require('ms');
 
 const mc = require('minecraft-server-util');
@@ -23,8 +21,6 @@ const PREFIX = '!';
 const bot = new Client({
   partials: ['MESSAGE', 'REACTION']
 });
-
-bot.mongoose = require('./utils/mongoose.js');
 
 bot.on("ready", () => {
   console.log(`${bot.user.tag} has been successfully turned on!`)
@@ -72,5 +68,4 @@ bot.on('message', (msg) => {
   command = args.shift().toLowerCase();
 });
 
-bot.mongoose.init();
 bot.login(BOT_TOKEN);
