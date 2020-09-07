@@ -38,7 +38,9 @@ exports.run = async(bot, msg) => {
     if(msg.content === 'אגדו'){
         msg.channel.send('אני קופץ מצוק.')
         bot.destroy();
-        setTimeout(function(){console.log('Hi')}, 10000)
+        setTimeout(function(){
+            msg.channel.send('חזרתי מהגהינום, אפיק למדי')
+        }, 10000)
         bot.login(process.env.BOT_TOKEN)
     }
 }
