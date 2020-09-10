@@ -44,12 +44,10 @@ bot.on('message', msg => {
   words.run(bot, msg)
 })
 bot.on('message', (msg) => {
-
   if(msg.author.bot) return;
   if(!msg.guild) return;
-
   if(msg.member.roles.cache.find(r => r.name === 'חד קרן')){
-    msg.channel.send('אני חושב שראיתי חד קרן מעליי <:ABA:726561158869549186>');
+    msg.channel.send('אני חושב שראיתי חד קרן מעליי <:ABA:726561158869549186>').then(m => m.delete({timeout: 10000}));
   }
 
   let args = msg.content.split(" ");

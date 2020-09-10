@@ -5,6 +5,13 @@ exports.run = async(bot, msg) => {
     if(msg.content === 'שתוק כבר אחמד'){
         msg.channel.send('לא משנה אני מצטער על נכותי')}
 
+    if(msg.content === 'אחמד'){
+        msg.channel.send('אה כפרע')}
+
+    if(msg.content === 'אחמד זה שם מגניב'){
+        var nickname = msg.member.nickname;
+        msg.member.setNickname('אחמד השתלט עליך').then(setTimeout(function(){ msg.member.setNickname(nickname) }, 30000)); }
+
     if(msg.content === "אחמד מריו"){
         msg.channel.send("https://www.youtube.com/watch?v=nOCgjuu0xeA")}
 
