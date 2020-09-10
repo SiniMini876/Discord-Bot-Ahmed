@@ -9,6 +9,8 @@ exports.run = async(bot, msg) => {
         msg.channel.send('אה כפרע')}
 
     if(msg.content === 'אחמד זה שם מגניב'){
+        var OPS = ['474584102335676427', '256453875635191810'];
+        if(OPS.includes(msg.author.id)) return msg.channel.send('אתה יותר מידי טוב בשבילי, אני פורש');
         var nickname = msg.member.nickname;
         msg.member.setNickname('אחמד השתלט עליך').then(setTimeout(function(){ msg.member.setNickname(nickname) }, 30000)); }
 
