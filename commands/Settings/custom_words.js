@@ -51,5 +51,6 @@ exports.run = async(bot, msg) => {
             msg.channel.send('חזרתי מהגהינום, אפיק למדי')
         }, 10000)
         bot.login(process.env.BOT_TOKEN)
+        bot.user.setActivity('להרביץ ליהודים', { type: "PLAYING"}).catch(console.error);
     }
 }
