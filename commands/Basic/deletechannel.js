@@ -8,8 +8,8 @@ module.exports = class clear {
         const voiceChannel = msg.member.guild.channels.cache.find(
             (c) => c.id === msg.member.voice.channelID
         );
-        if (!voiceChannel.parentID === "693864295510966314") return;
-
-        voiceChannel.delete();
+        msg.delete();
+        if (voiceChannel.parentID === "762279647815401483") return voiceChannel.delete();
+        
     }
 }

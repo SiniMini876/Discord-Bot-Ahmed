@@ -1,10 +1,10 @@
 module.exports = class clear {
     constructor(){
         this.name = 'createchannel',
-        this.alias = ['ch'],
+        this.alias = ['cr'],
         this.usage = '!createchannel <max members>'
     }
-    run(bot, msg, args){
+    async run (bot, msg, args){
 
 	if (!args[1]) return msg.channel.send("אתה צריך לכתוב את המקסימום אנשים לחדר.");
 
