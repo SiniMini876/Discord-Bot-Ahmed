@@ -9,7 +9,7 @@ module.exports = class clear {
 	if (!args[1]) return msg.channel.send("אתה צריך לכתוב את המקסימום אנשים לחדר.");
 
 	const newVoiceChannel = await msg.guild.channels.create(
-		`חדר פרטי - ${args[1]}`,
+		`חדר פרטי - ${msg.member} -  ${args[1]}`,
 		{
 			type: "voice",
 			parent: "762279647815401483",
