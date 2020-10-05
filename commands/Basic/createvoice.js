@@ -19,6 +19,9 @@ module.exports = class clear {
         const voiceChannel = msg.guild.channels.cache.find(
             (c) => c.id === newVoiceChannel.id
         );
+        try {
+            msg.member.voice.setChannel(voiceChannel);
+        } catch (err) {}
 
         const inviteVoice = await voiceChannel.createInvite({
             maxAge: 15,
