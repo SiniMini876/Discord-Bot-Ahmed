@@ -28,10 +28,10 @@ bot.on("ready", () => {
 
   var textChannel = bot.channels.cache.find(channel => channel.id === '719178323200180266');
 
-  setInterval(() => {
-    var dog = require('./commands/Settings/dog.js')
-    dog.run(bot, textChannel)
-  }, 86400000);
+  // setInterval(() => {
+  //   var dog = require('./commands/Settings/dog.js')
+  //   dog.run(bot, textChannel)
+  // }, 10000000000000000000000000000000000000000000000000000000000);
   }
 );
 
