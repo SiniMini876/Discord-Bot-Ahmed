@@ -1,13 +1,12 @@
 const Discord = require('discord.js');
 const { Client, Util, MessageEmbed, MessageAttachment } = require("discord.js");
 
-module.exports = class kun {
-    constructor(){
-        this.name = 'kun',
-        this.alias = ['kun'],
-        this.usage = '!kun'
-    }
-    run(bot, msg, args,){
+module.exports = {
+    name: "kesem",
+    aliases: ["k"],
+    cooldown: 5,
+    description: "You send a question and the bot sends a random response.",
+    async execute(bot, msg, args,){
 
         if(!args[2]) return msg.reply('תשאל שאלה נורמלית בן אדם');
         let replies = ['כן', 'לא', 'אני לא יודע, מה אני יעשה', 'תשאל מאוחר יותר אני נכה מידי כרגע'];

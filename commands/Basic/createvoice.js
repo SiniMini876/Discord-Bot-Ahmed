@@ -1,10 +1,11 @@
-module.exports = class clear {
-    constructor() {
-        (this.name = "createchannel"),
-            (this.alias = ["cr"]),
-            (this.usage = "!createchannel <max members>");
-    }
-    async run(bot, msg, args) {
+const message = require("../../events/guild/message");
+
+module.exports = {
+    name: "createroom",
+    aliases: ["cr"],
+    cooldown: 5,
+    description: "The bot create a tempoery voice room.",
+    async execute(client, msg, args) {
         if (!args[1])
             return msg.channel.send("אתה צריך לכתוב את המקסימום אנשים לחדר.");
 
@@ -32,19 +33,28 @@ module.exports = class clear {
         const inviteURL = await msg.channel.send(inviteVoice.url);
 
         msg.delete();
-
         setInterval(() => {
-            while (
-                msg.guild.channels.cache.find(
-                    (c) => c.id === newVoiceChannel.id
-                )
-            ) {
-                if (!voiceChannel.members.find((m) => m.id === msg.author.id)) {
-                    voiceChannel.delete().catch();
-                    inviteURL.delete().catch();
-                }
-                return;
-            }
-        }, 10000);
+                if(msg.guild.channels.cache.find(c => c.id === voiceChannel.id)){
+                    if (voiceChannel.members.array().length === 0) {
+                        voiceChannel.delete().catch();
+                        inviteURL.delete().catch();
+                        return;
+                        } else if(voiceChannel.full) {
+                            voiceChannel.overwritePermissions([{
+                                    id: '720677306036781218',
+                                    deny: ['VIEW_CHANNEL'],
+                                },{
+                                    id: msg.author.id,
+                                    allow: ['VIEW_CHANNEL', 'MOVE_MEMBERS']
+                                }], 'The channel is full');
+                        } else {
+                            voiceChannel.overwritePermissions([{
+                                id: '474584102335676427',
+                                allow: ['VIEW_CHANNEL'],
+                            }], 'The channel is NOT full');
+                        }
+                    } else return;
+            }, 2000);
+        
     }
 };

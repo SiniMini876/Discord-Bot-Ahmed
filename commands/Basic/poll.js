@@ -1,13 +1,12 @@
 const Discord = require('discord.js');
 const { Client, Util, MessageEmbed, MessageAttachment } = require("discord.js");
 
-module.exports = class poll {
-    constructor(){
-        this.name = 'poll',
-        this.alias = ['poll'],
-        this.usage = '!poll'
-    }
-    run(bot, msg, args,){
+module.exports = {
+    name: "poll",
+    aliases: [""],
+    cooldown: 5,
+    description: "The bot create a poll",
+    async execute(bot, msg, args,){
         if(args[1]){
             let msgArgs = args.slice(1).join(" ");
             msg.channel.send("📋 " + "**" + msgArgs + "**").then(messageReaction => {

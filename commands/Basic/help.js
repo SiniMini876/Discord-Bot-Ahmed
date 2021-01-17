@@ -1,13 +1,12 @@
 const Discord = require("discord.js");
 const { Client, Util, MessageEmbed, MessageAttachment } = require("discord.js");
 
-module.exports = class help {
-  constructor(){
-    this.name = 'help',
-    this.alias = ['h'],
-    this.usage = '!help'
-  }
-    run(bot, msg, args, ms, mc){ 
+module.exports = {
+  name: "help",
+  aliases: ["h"],
+  cooldown: 5,
+  description: "The bot sends an help page, like this one.",
+  async execute(bot, msg, args, ms, mc){ 
       const helpembed = new Discord.MessageEmbed()
       .setColor("#7289DA")
       .setDescription(

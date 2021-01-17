@@ -1,13 +1,13 @@
 const Discord = require("discord.js");
 const { Client, Util, MessageEmbed, MessageAttachment } = require("discord.js");
 
-module.exports = class mute {
-  constructor(){
-    this.name = 'mute',
-    this.alias = ['m'],
-    this.usage = '!mute'
-  }
-    run(bot, msg, args, ms, mc){ 
+module.exports = {
+  name: "mute",
+  aliases: ["m"],
+  cooldown: 10,
+  usage: "!mute <second(s) / minute(s) / hour(s)>",
+  description: "The bot tempoery mute someone",
+  async execute(bot, msg, args, ms, mc){ 
 
         // creating a person variable
         var person = msg.guild.member(msg.mentions.users.first() || msg.guild.members.get(args[1]))
