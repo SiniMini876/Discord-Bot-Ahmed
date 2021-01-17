@@ -20,9 +20,9 @@ module.exports = {
         const voiceChannel = msg.guild.channels.cache.find(
             (c) => c.id === newVoiceChannel.id
         );
-        try {
+        if(msg.member.voice.channel){
             msg.member.voice.setChannel(voiceChannel);
-        } catch (err) {}
+        }{}
 
         const inviteVoice = await voiceChannel.createInvite({
             maxAge: 15,
@@ -54,7 +54,7 @@ module.exports = {
                             }], 'The channel is NOT full');
                         }
                     } else return;
-            }, 2000);
+            }, 5000);
         
     }
 };

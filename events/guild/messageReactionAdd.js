@@ -17,14 +17,12 @@ module.exports = async (Discord, client, reaction, user) => {
         try{
         var msg = await reaction.message.fetch();
         if(msg.id === '730381895132643328'){
-          console.log('Cached')
           applyRole();
         }
       }catch(err) {
         console.log(err);
         }
       }else{
-        console.log('Not a partial')
         if(reaction.message.id === '730381895132643328'){
           applyRole();
         }
