@@ -29,7 +29,8 @@
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.27"
+    "mongoose": "^5.9.27",
+    "superagent": "^6.1.0"
   },
   "optionalDependencies": {
     "@discordjs/uws": "^10.149.0"

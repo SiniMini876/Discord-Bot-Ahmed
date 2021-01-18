@@ -15,4 +15,9 @@ module.exports = (Discord, client) => {
         let memberCounterChannel = guild.channels.cache.get('791247896762515457');
         memberCounterChannel.setName(`יש אצלנו ${guild.memberCount.toLocaleString()} נחשים`);
     }, 1.8e+6)
+    setInterval(() => {
+        let guild = client.guilds.cache.find(g => g.id === "693864294911049829");
+        let textChannel = guild.channels.cache.find(c => c.id === "719178323200180266");
+        const dog24 = require("../../commands/Settings/dog").run(client, textChannel)
+    }, 8.64e+7)
 }
