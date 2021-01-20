@@ -5,7 +5,8 @@ module.exports = {
     name: "poll",
     aliases: [""],
     cooldown: 5,
-    description: "The bot create a poll",
+    description: "הבוט פותח סקר",
+    usage: "poll <the poll title>",
     async execute(bot, msg, args,){
         if(args[1]){
             let msgArgs = args.slice(1).join(" ");

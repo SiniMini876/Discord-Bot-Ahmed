@@ -20,8 +20,4 @@ module.exports = (Discord, client) => {
         let textChannel = guild.channels.cache.find(c => c.id === "719178323200180266");
         const dog24 = require("../../commands/Settings/dog").run(client, textChannel)
     }, 8.64e+7)
-
-    // creating slash commands
-
-    require('../../commands/Settings/slashcommandsproperties')(client, Discord);
 }

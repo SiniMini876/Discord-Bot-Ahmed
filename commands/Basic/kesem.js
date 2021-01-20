@@ -5,7 +5,7 @@ module.exports = {
     name: "kesem",
     aliases: ["k"],
     cooldown: 5,
-    description: "You send a question and the bot sends a random response.",
+    description: "אתה שואל שאלת כן ולא והבוט שולח תשובה רנדומלית",
     async execute(bot, msg, args,){
 
         if(!args[2]) return msg.reply('תשאל שאלה נורמלית בן אדם');

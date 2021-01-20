@@ -6,7 +6,7 @@ module.exports = {
   aliases: ["m"],
   cooldown: 10,
   usage: "!mute <second(s) / minute(s) / hour(s)>",
-  description: "The bot tempoery mute someone",
+  description: "אם אתה לא מוד \ OP אין לך שום סיבה להשתמש בזה, תקרא לסיני לעזרה",
   async execute(bot, msg, args, ms, mc){ 
 
         // creating a person variable

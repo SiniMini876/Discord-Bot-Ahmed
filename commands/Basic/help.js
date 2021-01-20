@@ -6,40 +6,50 @@ module.exports = {
   aliases: ["h"],
   cooldown: 5,
   description: "The bot sends an help page, like this one.",
-  async execute(bot, msg, args, ms, mc){ 
-      const helpembed = new Discord.MessageEmbed()
-      .setColor("#7289DA")
-      .setDescription(
-      `
-__**Commands List**__
-    
-**חשוב מאוד להבהיר, כל פקודה מתחילה ב-!**
+  async execute(bot, msg, args){ 
 
-**פקודות לחדרים זמניים**
+		if (args[1]) {
+			return getCMD(bot, msg, args[1]);
+		}
+		else {
+			return helpMSG(bot, msg);
+		}
+	},
+};
 
-> \`!cr [מגבלת אנשים בחדר]\` = יצירת חדר זמני
-> \`!cd\` = מחיקת חדר זמני, אתה חייב להיות מחובר לחדר כדי לבצע את הפקודה הזאת. 
+async function helpMSG(client, message) {
 
-**פקודות לסקרים**
+	const embed = new MessageEmbed()
+		.setColor(process.env.COLOR)
+		.setTitle('אחמד - עזרה')
+		.setThumbnail(client.user.avatarURL())
+		.setDescription(`For a full list of commands, please type \`${client.prefix}commands\` \n\nTo see more info about a specific command, please type \`${client.prefix}help <command>\` without the \`<>\``)
+		.addField('למה זה באנגלית?', 'דיסקורד לא תומך בצורה מלאה בעברית לכן סיני היקר שלנו כתב הכל באנגלית')
+	message.channel.send(embed);
+}
 
-> \`!poll\` = וואלק תכתוב poll ואז את השאלה שאתה רוצה לשאול
-    
-**פקודות לפריקינג מוזיקה בחדרים**
-    
-> **\`!play [title/url]\`**
-> **\`!search [title]\`**
-> \`!skip = יעביר לך שיר\`
-> \`!stop = יעצור לך את הפריקינג דבר המחורבן הזה\`
-> \`!pause = זה כי אני מניאק ואני רוצה שרק תשהה את השיר\`
-> \`!resume = זה כי אתה מפגר שרוצה להמשיך עם הזוואות של המוזיקה הישראלית\`
-> \`!nowplaying = זה כי אני מגניב שרוצה להראות לך את השיר שמנוגן\`
-> \`!queue = זה כי אני מגניב שמראה לך את השירים שבתור\`
-> \`!volume = זה כי אני מתחשב בזה שהשיר אולי יחריש לך את האוזניים\``
-      )
-      .setFooter(
-        "©️ SiniMini876",
-      );
-      msg.author.send(helpembed);
-      msg.delete({ timeout: 5000 }).catch(console.error);
-    }
+async function getCMD(client, message, input) {
+
+	const cmd = client.commands.get(input.toLowerCase()) || client.commands.find(cd => cd.aliases && cd.aliases.includes(input));;
+
+  let info = `No information found for command **${input.toLowerCase()}**\nTry find your command with the command \`!commands\` or \`!help\``;
+  const em = new MessageEmbed().setTitle(message.author.username).setThumbnail(client.user.avatarURL()).setTimestamp();
+
+	if (!cmd) {
+		return message.channel.send(em.setColor('#ff0000').setDescription(info));
+  }
+  
+  const embed = new MessageEmbed().setTitle(`${cmd.name} - ${message.author.username}`).setThumbnail(client.user.avatarURL()).setTimestamp();
+
+	if (cmd.name) info = `**Command Name**: \`${cmd.name}\``;
+	if (cmd.aliases) info += `\n**Aliases**: \`${cmd.aliases.join(', ')}\``;
+	if (cmd.description) info += `\n**Description**: ${cmd.description}`;
+	if (cmd.usage) {
+		info += `\n**Usage**: ${client.prefix}${cmd.usage}`;
+		embed.setFooter('<> = REQUIRED | [] = OPTIONAL');
+	}
+	if (cmd.usage2) info += `\n**Usage 2**: ${client.prefix}${cmd.usage2}`;
+
+	return message.channel.send(embed.setColor(process.env.COLOR).setDescription(info));
+
 }
