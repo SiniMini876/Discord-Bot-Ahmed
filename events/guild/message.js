@@ -1,11 +1,25 @@
 require("dotenv").config();
+const alexa_api = require("alexa-bot-api");
+const alexa = new alexa_api();
 
 module.exports = (Discord, client, message) => {
-    if(!message.content.startsWith(client.prefix) || message.author.bot){
+    if(message.author.bot) return
+    if(!message.content.startsWith(client.prefix)){
+        if(message.channel.id === "810559061967241276") {
+            return alexa.getReply(message.content).then(reply => {
+                try{
+                    let replyFilter = reply.replace("סקס", "") || reply.replace("פוני", "") || reply.replace("I would like to go to my bedroom with you.", "b")
+                    message.channel.send(replyFilter)
+
+                } catch(err) {
+                    throw err
+                }
+            })
+        }
         require('../../commands/Settings/custom_words').run(client, message);
         return;
     };
-    
+
     let args = message.content.slice(client.prefix.length).split(/ +/);
     let arg = message.content.split(' ');
     const cmd = args.shift().toLowerCase();
