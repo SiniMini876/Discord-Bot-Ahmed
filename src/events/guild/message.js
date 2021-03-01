@@ -1,6 +1,4 @@
 require("dotenv").config();
-const alexa_api = require("alexa-bot-api");
-const alexa = new alexa_api();
 
 module.exports = (Discord, client, message) => {
     if(message.author.bot) return
