@@ -33,7 +33,8 @@
     "ini": "^2.0.0",
     "mongoose": "^5.9.27",
     "mquery": "^3.2.4",
-    "superagent": "^6.1.0"
+    "superagent": "^6.1.0",
+    "wokcommands": "^1.2.8"
   },
   "optionalDependencies": {
     "@discordjs/uws": "^10.149.0"

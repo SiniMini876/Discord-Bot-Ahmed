@@ -1,14 +1,28 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const wokCommands = require("wokcommands");
+let demoServerID = "720226309267259432";
 
-module.exports = (Discord, client) => {
-
+module.exports = async (Discord, client) => {
+    const getApp = (guildID) => {
+        const app = client.api.applications(client.user.id)
+        if(guildID){
+            app.guilds(guildID)
+        }
+        return app
+    }
     app.get('/', (req, res) => res.send('AhmedBot is Active!'));
 
     app.listen(port, () => console.log(`AhmedBot is Active and lisening on port ${port}`));
 
     client.user.setActivity('להרביץ ליהודים', { type: "PLAYING"}).catch(console.error);
+
+    new wokCommands(client, {
+        commandsDir: 'slashCommands',
+        testServers: [demoServerID],
+        showWarns: false
+    })
 
     setInterval(() => {
         let guild = client.guilds.cache.get('693864294911049829');
