@@ -24,7 +24,7 @@ module.exports = {
         );
         if(msg.member.voice.channel){
             msg.member.voice.setChannel(voiceChannel);
-        }{}
+        }
 
         const inviteVoice = await voiceChannel.createInvite({
             maxAge: 15,
