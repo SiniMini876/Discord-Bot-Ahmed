@@ -9,4 +9,10 @@ module.exports = (Discord, client, guildMember) => {
         let almo = guildMember.guild.roles.cache.find(r => r.id === "805364807427162132");
         guildMember.roles.add(almo)
     }
+    // Skyblock
+    if(guildMember.guild.id === "839124298983014450"){
+        let welcomeChannel = guildMember.guild.channels.cache.get('839129581725155379').send(`Hello <@${guildMember.user.id}>, welcome to the skyblock best community! `)
+        let resident = guildMember.guild.roles.cache.find(r => r.id === "839127143409516554");
+        guildMember.roles.add(resident)
+    }
 }
